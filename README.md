@@ -3,9 +3,12 @@
 This repository contains an implementation of the BAC ("Basic Access Control") protocol for passports for the DeepSec prover tool. It differs from the 'stock' implementation given in the examples folder of the DeepSec tool in two key ways:
 
 - The passport and reader roles accept custom names for channels, allowing the option of modelling an attacker who can detect which roles (or possibly agents) are exchanging messages.
-- The processes which are being checked for equivalence are changed. Instead of checking (A | B) =? (A | A), we check (A|(A+B)) =? (A | A).
+- The processes which are being checked for equivalence are changed. Instead of checking 
+<p align="center">`(A | B) ≈? (A | A)`</p>,
+we check
+<p align="center>"> `(A|(A+B)) ≈? (A | A)`</p>.
 
-Here, | can be interpreted as parallel composition, + as a nondeterministic choice, and =? a check for Trace Equivalence of processes.
+Here, | can be interpreted as parallel composition, + as a nondeterministic choice, and ≈? a check for Trace Equivalence of processes.
 
 These changes are performed to demonstrate that varying definitions of equivalence, unlinkability (in terms of this equivalence) and the underlying adversary model can produce different results. As discussed in our paper, this demonstrates the need for thoroughness and consistency in defining our security model.
 
