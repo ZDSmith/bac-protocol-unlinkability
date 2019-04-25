@@ -8,7 +8,7 @@ This repository contains an implementation of the BAC ("Basic Access Control") p
 
 we check
 
-<p align="center>">(A|(A+B)) ≈? (A | A)</p>.
+<p align="center">(A|(A+B)) ≈? (A | A).</p>
 
 Here, | can be interpreted as parallel composition, + as a nondeterministic choice, and ≈? a check for Trace Equivalence of processes.
 
