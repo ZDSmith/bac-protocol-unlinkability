@@ -1,0 +1,81 @@
+// Passport protocol outlined by ICAO
+
+// channels
+free cPassport.
+free cReader.
+free common.
+
+// constants
+const error.
+
+// functions
+fun senc/2.
+fun mac/2.
+
+reduc sdec(senc(x,y),y) -> x.
+
+/*
+Description of the passport role:
+- It sends out a challenge
+- It expects to receive three nonces in exchange
+- Assuming decrypt and demac work properly, it sends out more nonces
+- Else it sends an error message
+*/
+
+let passport(ch, kenc, kmac) =
+  new nt;
+  new kt;
+  out(ch, nt);
+  in(ch, x);
+  let (content, cmac) = x in
+    if cmac = mac(content, kmac) then (
+      let (nr, in_nt, kr) = sdec(content, kenc) in
+        if in_nt = nt then (
+          let out_msg = senc((nt, nr, kt), kenc) in
+          out(ch, (out_msg, mac(out_msg, kmac) )) // Everything successful!
+        ) else out(ch, error) // Encrypted packet was not well formed/didn't contain correct nonce
+    ) else out(ch, error) // MAC was not a mac of the content
+  else out(ch, error). // Message was not content+mac
+
+/*
+Description of the Reader role:
+- It receives a challenge
+- It constructs a message using this challenge and two fresh nonces
+*/
+
+let reader(ch, kenc, kmac) =
+  new nr;
+  new kr;
+  in(ch, x);
+  let out_msg = senc((nr, x, kr), kenc) in
+  out(ch, (out_msg, mac(out_msg, kmac))).
+
+/*
+Passport and Reader in parallel
+*/
+
+let OneSessionPassport(readerChannel, passportChannel, kenc, kmac) =
+  (reader(readerChannel, kenc, kmac) | passport(passportChannel, kenc, kmac)).
+
+let Process1 =
+  new kenc1;
+  new kenc2;
+  new kmac1;
+  new kmac2;
+  (
+    OneSessionPassport(common, common, kenc1, kmac1) |       // Passport of A
+    ((OneSessionPassport(common, common, kenc1, kmac1))+
+    (OneSessionPassport(common, common, kenc2, kmac2)))         // Passport of A
+  ).
+
+let Process2 =
+  new kenc1;
+  new kenc2;
+  new kmac1;
+  new kmac2;
+  (
+    OneSessionPassport(common, common, kenc1, kmac1) |       // Passport of A
+    OneSessionPassport(common, common, kenc2, kmac2)         // Passport of A
+  ).
+
+query trace_equiv(Process1,Process2).
