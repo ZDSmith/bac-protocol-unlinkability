@@ -4,9 +4,11 @@ This repository contains an implementation of the BAC ("Basic Access Control") p
 
 - The passport and reader roles accept custom names for channels, allowing the option of modelling an attacker who can detect which roles (or possibly agents) are exchanging messages.
 - The processes which are being checked for equivalence are changed. Instead of checking 
-<p align="center">`(A | B) ≈? (A | A)`</p>,
+<p align="center">(A | B) ≈? (A | A),</p>
+
 we check
-<p align="center>"> `(A|(A+B)) ≈? (A | A)`</p>.
+
+<p align="center>">(A|(A+B)) ≈? (A | A)</p>.
 
 Here, | can be interpreted as parallel composition, + as a nondeterministic choice, and ≈? a check for Trace Equivalence of processes.
 
