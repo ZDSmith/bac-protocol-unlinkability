@@ -27,7 +27,7 @@ For the implementation in our model, the DeepSec tool gives a result of "equival
 
 
 
-![Figure](/figs/BAC-british-trace-equivalence.png?raw=true "Deepsec Counterexample to Trace Equivalence")
+![Figure](https://raw.githubusercontent.com/ZDSmith/bac-protocol-unlinkability/master/figs/bac-british-trace-equivalence.png "Deepsec Counterexample to Trace Equivalence")
 
 
 
