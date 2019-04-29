@@ -27,7 +27,7 @@ For the implementation in our model, the DeepSec tool gives a result of "equival
 
 
 
-![Figure demonstrating the counterexample to trace equivalence given by running analysis on the included file](figs/BAC-british-trace-equivalence.png?raw=true "Deepsec Counterexample to Trace Equivalence")
+![Figure](/figs/BAC-british-trace-equivalence.png?raw=true "Deepsec Counterexample to Trace Equivalence")
 
 
 
