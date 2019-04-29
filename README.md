@@ -27,7 +27,7 @@ For the implementation in our model, the DeepSec tool gives a result of "equival
 
 
 
-![Figure demonstrating the counterexample to trace equivalence given by running analysis on the included file](/figs/BAC-british-trace-equivalence.png"Deepsec Counterexample to Trace Equivalence")
+![Figure demonstrating the counterexample to trace equivalence given by running analysis on the included file](/figs/BAC-british-trace-equivalence.png?raw=true"Deepsec Counterexample to Trace Equivalence")
 
 
 
@@ -39,6 +39,6 @@ does not hold (i.e. the two processes are not **trace** equivalent). In particul
 
 We argue (in our paper) that this motivates the need for a stronger verification methodology. Indeed, the scenario given in the included file is closer to one that an adversary may face in the real-world: they must be able to tell the difference between the scenario when only one agent is present, and that where they do not know whether it is one or two agents.
 
-Either way, note that the accepted definition of strong unlinkability is based not on trace equivalence but on **bisimulation**. As such a single trace is not sufficient to (dis)prove strong unlinkability. Both weak and strong unlinkability are generally argued over **infinite** duplication. Therefore while the DeepSec results give an indication of the existence of an attack on weak unlinkability, it is not sufficient to fully prove it.
+Either way, note that the accepted definition of strong unlinkability is based not on trace equivalence but on **bisimulation**. As such a single trace is not sufficient to (dis)prove strong unlinkability. Both weak and strong unlinkability are generally argued over **infinite** duplication. Therefore while the DeepSec results give an indication of the (non)existence of an attack on weak unlinkability, it is not sufficient to fully prove it.
 
 DeepSec contains the required syntax for both infinite duplication and observational equivalence (which is related to, but not the same as, bisimulation). However, at the time of submission, support for both of these features is either unimplemented or unstable (i.e. leads to nontermination). We argue that the use of a theory built with bisimulation at its core should allow for analysis that is more faithful to the accepted definition of strong unlinkability, and thus more precise analysis of protocols.
