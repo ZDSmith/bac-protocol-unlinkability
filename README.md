@@ -1,44 +1,18 @@
 # Summary
 
-This repository contains several implementation of the BAC ("Basic Access Control") protocol for passports for the DeepSec prover tool. We introduce an updated model ( `deepsec/british-passport-nondet-choice.dps`), with the following changes compared to the "original" model (`deepsec/british-passport-original.dps`, copied from the original deepsec repository without change):
+This repository is presented as part of a submission for ESORICS 2019. In particular, in the `deepsec` folder, we provide a new implementation of the passport BAC protocol, making use of the nondeterministic choice operator (+) in order to more faithfully model weak unlinkability
 
-- The passport and reader roles accept custom names for channels, allowing the option of modelling an attacker who can detect which roles (or possibly agents) are exchanging messages.
-- The processes which are being checked for equivalence are changed. Instead of checking 
-<p align="center">(A | B) ≈<sub>T</sub>? (A | A),</p>
+An in-depth `README.md` file that can be found in the `deepsec` folder, or a short summary follows.
 
-we check
-
-<p align="center">(A|(A+B)) ≈<sub>T</sub>? (A | A).</p>
-
-Here, | can be interpreted as parallel composition, + as a nondeterministic choice, and ≈<sub>T</sub>? a check for Trace Equivalence of processes.
-
-These changes are performed to demonstrate that varying definitions of equivalence, unlinkability (in terms of this equivalence) and the underlying adversary model can produce different results. As discussed in our paper, this demonstrates the need for thoroughness and consistency in defining a security model.
-
-# Execution
-
-The DeepSec tool can be gotten from the repository: 
-` https://github.com/DeepSec-prover/deepsec`
-. If DeepSec is already present on your machine you can execute the included model with the command
-`deepsec <file>`. Depending on your install method, you may need to include an argument `-deepsec_dir <path to deepsec>` in order to correctly load the HTML file produced as output.
-
-# Results
-
-For the implementation in our model, the DeepSec tool gives a result of "equivalent processes" after almost 24 hours of computation. This is in contrast to the example included in the DeepSec tool, which returns "not equivalent" (usually in less than one second of computation). The trace produced by DeepSec for the original model has been reconstructed in the diagram below.
+As part of our experiment we also created a custom implementation of the passport role in the BAC protocol that can be run on an android smartphone. This implementation will be released at a later date.
 
 
 
-![Figure](https://raw.githubusercontent.com/ZDSmith/bac-protocol-unlinkability/master/figs/bac-british-trace-equivalence.png "Deepsec Counterexample to Trace Equivalence")
+## DeepSec Implementation
 
+The `deepsec` folder contains two implementations of the BAC protocol. One is copied faithfully from the original deepsec repository (located at [https://github.com/DeepSec-prover/deepsec](https://github.com/DeepSec-prover/deepsec) ). The other is one we have prepared for this submission.
 
+The key observation of these two code files is that a change in the modelling parameters leads to DeepSec confirming an attack on trace equivalence in one setting, and showing that no attack exists in another. We make the following arguments:
 
-This diagram demonstrates that the claim
-
-<p align="center">(A | B) ≈<sub>T</sub>? (A | A),</p>
-
-does not hold (i.e. the two processes are not **trace** equivalent). In particular, gives a trace that exists in the setting (A | B), but not in the setting (A | A) - in this case, it is when we "mix" the keys, which results in an error message in one setting but not in the other. Note that the setting (A | (A+B)) has this trace - its set of traces is clearly a superset of that of (A+B), while DeepSec demonstrates that it is the trivial superset (i.e. they are in fact equal).
-
-We argue (in our paper) that this motivates the need for a stronger verification methodology. Indeed, the scenario given in the included file is closer to one that an adversary may face in the real-world: they must be able to tell the difference between the scenario when only one agent is present, and that where they do not know whether it is one or two agents.
-
-Either way, note that the accepted definition of strong unlinkability is based not on trace equivalence but on **bisimulation**. As such a single trace is not sufficient to (dis)prove strong unlinkability. Both weak and strong unlinkability are generally argued over **infinite** duplication. Therefore while the DeepSec results give an indication of the (non)existence of an attack on weak unlinkability, it is not sufficient to fully prove it.
-
-DeepSec contains the required syntax for both infinite duplication and observational equivalence (which is related to, but not the same as, bisimulation). However, at the time of submission, support for both of these features is either unimplemented or unstable (i.e. leads to nontermination). We argue that the use of a theory built with bisimulation at its core should allow for analysis that is more faithful to the accepted definition of strong unlinkability, and thus more precise analysis of protocols.
+* The model that we present (using the (+) operator) gives a closer approximation to the definition of weak unlinkability that is accepted in the literature
+* Precision in the definitions used is absolutely required to ensure that we, as a community, have a consistent understanding of our security definitions. Many abstractions or simplifications that are made to aid analysis can incidentally affect the outcome
