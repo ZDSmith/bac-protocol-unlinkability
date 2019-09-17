@@ -16,3 +16,9 @@ The key observation of these two code files is that a change in the modelling pa
 
 * The model that we present (using the (+) operator) gives a closer approximation to the definition of weak unlinkability that is accepted in the literature
 * Precision in the definitions used is absolutely required to ensure that we, as a community, have a consistent understanding of our security definitions. Many abstractions or simplifications that are made to aid analysis can incidentally affect the outcome
+
+
+
+## Vulnerability exploitation
+
+In the [next repository](https://github.com/bboyifeel/bac-protocol-unlinkability-exploitation) you can find an implementation of Android applications that emulate fake e-passport and fake e-passport-reader altogether with step-by-step replication guide.
