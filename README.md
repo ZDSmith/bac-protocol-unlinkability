@@ -21,4 +21,4 @@ The key observation of these two code files is that a change in the modelling pa
 
 ## Vulnerability exploitation
 
-In the [next repository](https://github.com/bboyifeel/bac-protocol-unlinkability-exploitation) you can find an implementation of Android applications that emulate fake e-passport and fake e-passport-reader altogether with step-by-step replication guide.
+In the [next repository](https://github.com/bboyifeel/bac-protocol-unlinkability-exploitation), you can find an implementation of Android applications that emulate fake e-passport and fake e-passport-reader altogether with step-by-step replication guide.
