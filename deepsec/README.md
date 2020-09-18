@@ -8,7 +8,7 @@ This subfolder contains several implementation of the BAC ("Basic Access Control
 
 we check
 
-<p align="center">(A|(A+B)) ≈<sub>T</sub>? (A | A).</p>
+<p align="center">(A|(A+B)) ≈<sub>T</sub>? (A | B).</p>
 
 Here, | can be interpreted as parallel composition, + as a nondeterministic choice, and ≈<sub>T</sub>? a check for Trace Equivalence of processes.
 
